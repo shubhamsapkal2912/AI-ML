@@ -1,0 +1,9 @@
+Name,Age,Salary,Category,Target
+Alice,25,50000,A,1
+Bob,30,60000,B,0
+Charlie,,55000,A,1
+David,45,,C,0
+Eva,28,52000,B,1
+Frank,,58000,C,0
+Grace,35,,A,1
+Hannah,40,62000,B,0

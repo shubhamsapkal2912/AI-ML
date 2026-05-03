@@ -1,0 +1,16 @@
+
+print("AI Decision-Making Flowchart\n")
+
+print("Start")
+print("  |")
+print("Input Data")
+print("  |")
+print("Data Preprocessing")
+print("  |")
+print("Apply AI Model")
+print("  |")
+print("Make Decision")
+print("  |")
+print("Output Result")
+print("  |")
+print("End")
