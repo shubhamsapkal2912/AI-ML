@@ -6,16 +6,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # Load dataset
-df = pd.read_csv("tennis.csv")
+data = pd.read_csv("tennis.csv")
 
 # Convert categorical to numeric
-for col in df.columns:
-    df[col] = LabelEncoder().fit_transform(df[col])
+for col in data.columns:
+    data[col] = LabelEncoder().fit_transform(data[col])
 
 # Split data
-X = df.iloc[:, :-1]
-y = df.iloc[:, -1]
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+x = data.drop(columns=['Play Tennis'])
+y = data['Play Tennis']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
 # Model
 model = GaussianNB()

@@ -4,49 +4,47 @@ normalization, train-test split). '''
 # Perform preprocessing (missing values, encoding, normalization, split)
 
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder,MinMaxScaler
 from sklearn.impute import SimpleImputer
+from sklearn.model_selection import train_test_split
 
-# Load dataset
-df = pd.read_csv("tennis.csv")
-print(df.head())
+#load the data
+data=pd.read_csv("tennis.csv")
+print(data.head())
 
-# -------------------------------
-# Handle Missing Values
-# -------------------------------
-imputer = SimpleImputer(strategy="most_frequent")
-df = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
+#fill the missing value
+simple_imputer=SimpleImputer(strategy="most_frequent")
+data=pd.DataFrame(simple_imputer.fit_transform(data),columns=data.columns)
 
-# -------------------------------
-# Encoding
-# -------------------------------
-le = LabelEncoder()
-cat_cols = df.select_dtypes(include='object')
+#encoding
+label_encoder=LabelEncoder()
+category_col=data.select_dtypes(include='object')
+for col in category_col:
+    data[col]=label_encoder.fit_transform(data[col])
 
-for col in cat_cols:
-    df[col] = le.fit_transform(df[col])
+print(data.head())
 
-# -------------------------------
-# Normalization
-# -------------------------------
-scaler = MinMaxScaler()
-num_cols = df.select_dtypes(include='number')
+#scaling
+min_max_scaler=MinMaxScaler()
+number_col=data.select_dtypes(include='number')
+for col in number_col:
+    data[col]=min_max_scaler.fit_transform(data[[col]])
 
-for col in num_cols:
-    df[col] = scaler.fit_transform(df[[col]])
+print(data.head())
 
-print("\nPreprocessed Data:\n", df.head())
+#traing the model
+#select the feature
+x = data.drop('Play Tennis', axis=1)
+y = data['Play Tennis']
 
-# -------------------------------
-# Train-Test Split
-# -------------------------------
-X = df.iloc[:, :-1]
-y = df.iloc[:, -1]
+#splitting
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
 
-x_train, x_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2
-)
+#Evalute
+print("Training: ",x_train.shape)
+print("Testing: ",x_test.shape)
 
-print("Training:", x_train.shape)
-print("Testing :", x_test.shape)
+
+
+
+

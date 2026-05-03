@@ -3,10 +3,10 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-df = pd.read_csv("preprocessing.csv")
+data = pd.read_csv("preprocessing.csv")
 
 # Select numeric data
-num = df.select_dtypes(include=['number'])
+num = data.select_dtypes(include=['number'])
 
 # Normalization
 minmax = MinMaxScaler()

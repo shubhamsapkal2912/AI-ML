@@ -1,28 +1,34 @@
 #19. Implement Naive Bayes classifier using Play Tennis dataset.
+
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
 from sklearn.naive_bayes import GaussianNB
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 
-# Load dataset
-df = pd.read_csv("tennis.csv")
+#Load dataset
+data=pd.read_csv("tennis.csv")
+print(data.head())
 
-# Convert categorical to numeric
-for col in df.columns:
-    df[col] = LabelEncoder().fit_transform(df[col])
+#convert categorial to numeric
+label_encoder=LabelEncoder()
+for col in data.columns:
+    data[col]=label_encoder.fit_transform(data[col])
 
-# Split data
-X = df.iloc[:, :-1]
-y = df.iloc[:, -1]
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+print(data.head())
 
-# Model
-model = GaussianNB()
-model.fit(x_train, y_train)
+#feature Selection
+x=data.drop(columns=['Play Tennis'])
+y=data['Play Tennis']
 
-# Prediction
-y_pred = model.predict(x_test)
+#train test split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
 
-# Accuracy
-print("Accuracy:", accuracy_score(y_test, y_pred))
+#model
+model=GaussianNB()
+model.fit(x_train,y_train)
+
+#predict
+y_pred=model.predict(x_test)
+
+print("Accuracy : ",accuracy_score(y_test,y_pred))

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 data=pd.read_csv("Mall_Customers.csv")
 
 #Select the columns
-x=data.df[['Annual Income (k$)','Spending Score (1-100)']].values
+x=data[['Annual Income (k$)','Spending Score (1-100)']].values
 
 #Load the model
 model=KMeans(n_clusters=5,random_state=42)
@@ -20,7 +20,7 @@ data['Cluster']=labels
 plt.scatter(x[:,0],x[:,1] ,c=labels)
 
 #plot the centroid
-centroid=KMeans.centroid_cluster_
+centroid=model.cluster_centers_
 plt.scatter(centroid[:,0],centroid[:,1],c='red')
 plt.title("Profitable Customer")
 plt.xlabel("Annual Income (k$)")

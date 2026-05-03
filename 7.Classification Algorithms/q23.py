@@ -5,22 +5,22 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # Load data
-df = pd.read_csv("diabetes.csv")
+data = pd.read_csv("diabetes.csv")
 
 # Split
-X = df.iloc[:, :-1]
-y = df.iloc[:, -1]
+x = data.drop(columns=['Outcome'])
+y = data['Outcome']
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=42
 )
 
 # Model
 model = KNeighborsClassifier(n_neighbors=5)
-model.fit(X_train, y_train)
+model.fit(x_train, y_train)
 
 # Predict
-y_pred = model.predict(X_test)
+y_pred = model.predict(x_test)
 
 # Evaluation
 print("Accuracy:", accuracy_score(y_test, y_pred))

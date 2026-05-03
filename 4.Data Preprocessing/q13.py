@@ -3,18 +3,18 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 
-df = pd.read_csv("preprocessing.csv")
-print(df.head())
+data = pd.read_csv("preprocessing.csv")
+print(data.head())
 le = LabelEncoder()
 
 # Select all categorical columns
-cat_cols = df.select_dtypes(include='object')
+cat_cols = data.select_dtypes(include='object')
 
 # Apply encoding to each column
 for col in cat_cols:
-    df[col] = le.fit_transform(df[col])
+    data[col] = le.fit_transform(data[col])
 
-print("preprocess\n",df.head())
+print("preprocess\n",data.head())
 
 
 '''import pandas as pd
