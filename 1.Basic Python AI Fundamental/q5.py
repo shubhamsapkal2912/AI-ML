@@ -1,14 +1,15 @@
-#5
+class AI:
+    def check(self, temperature):
+        if temperature > 30:
+            return "AI Agent: Turn ON the Air Conditioner"
+        elif temperature < 20:
+            return "AI Agent: Turn ON the Heater"
+        else:
+            return "AI Agent: Temperature is Normal"
 
-# Simple AI Agent (Temperature Control)
 
-temperature = int(input("Enter room temperature: "))
-
-if temperature > 30:
-    print("AI Agent: Turn ON the Air Conditioner")
-
-elif temperature < 20:
-    print("AI Agent: Turn ON the Heater")
-
-else:
-    print("AI Agent: Temperature is Normal")
+# Usage
+temp = int(input("Enter room temperature: "))
+obj = AI()
+result = obj.check(temp)
+print(result)

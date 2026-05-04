@@ -13,9 +13,9 @@ def depth_first_search(node, visited):
     visited.add(node)
     print(node, end=" ")
 
-    for n in graph[node]:
-        if n not in visited:
-            depth_first_search(n, visited)
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            depth_first_search(neighbor, visited)
 
 # Function call
 print("DFS Traversal:")

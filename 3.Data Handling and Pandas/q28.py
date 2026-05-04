@@ -1,26 +1,28 @@
+#Write a Python program to identify outliers.
 import pandas as pd
 
-# Load properly
+# Load data
 data = pd.read_csv('iris.csv')
 
-# Rename columns
-data.columns = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+# Use column as-is (or rename for simplicity)
+data.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "variety"]
 
-# IQR method
-Q1 = data['SepalLength'].quantile(0.25)
-Q3 = data['SepalLength'].quantile(0.75)
+# Select one column
+col = data["sepal_length"]
+
+# IQR calculation
+Q1 = col.quantile(0.25)
+Q3 = col.quantile(0.75)
 IQR = Q3 - Q1
 
-lower_bound = Q1 - 1.5 * IQR
-upper_bound = Q3 + 1.5 * IQR
+# Bounds
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
 
-outliers = data[(data['SepalLength'] < lower_bound) | 
-                (data['SepalLength'] > upper_bound)]
+# Outliers
+outliers = col[(col < lower) | (col > upper)]
 
-print(outliers)
-print("Q1:", Q1)
-print("Q3:", Q3)
-print("Lower Bound:", lower_bound)
-print("Upper Bound:", upper_bound)
-print("Min value:", data['SepalLength'].min())
-print("Max value:", data['SepalLength'].max())
+# Output
+print("Outliers:\n", outliers)
+print("Lower bound:", lower)
+print("Upper bound:", upper)

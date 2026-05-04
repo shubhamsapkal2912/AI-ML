@@ -1,31 +1,34 @@
-#9. Case Study: Apply K-Means Clustering on Mall Customers dataset to identify profitable customer groups.
+'''#9. Case Study: Apply K-Means Clustering on Mall Customers dataset to identify profitable 
+customer groups. '''
+
 import pandas as pd
-from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
-#load Dataset
-data=pd.read_csv("Mall_Customers.csv")
+data = pd.read_csv("Mall_Customers.csv")
 
-#Select the columns
-x=data[['Annual Income (k$)','Spending Score (1-100)']].values
+x = data[['Annual Income (k$)', 'Spending Score (1-100)']]
 
-#Load the model
-model=KMeans(n_clusters=5,random_state=42)
-labels=model.fit_predict(x)
+# Apply K-Means
+model = KMeans(n_clusters=5, random_state=42)
+data['Cluster'] = model.fit_predict(x)
 
-#add the cluster lables
-data['Cluster']=labels
+# Find Most Profitable Cluster
+avg = data.groupby('Cluster')[['Annual Income (k$)', 'Spending Score (1-100)']].mean()
+print("Cluster Averages:\n", avg)
 
-# plot the cluster
-plt.scatter(x[:,0],x[:,1] ,c=labels)
+best = (avg['Annual Income (k$)'] + avg['Spending Score (1-100)']).idxmax()
+print("Most Profitable Cluster:", best)
 
-#plot the centroid
-centroid=model.cluster_centers_
-plt.scatter(centroid[:,0],centroid[:,1],c='red')
-plt.title("Profitable Customer")
-plt.xlabel("Annual Income (k$)")
-plt.ylabel("Spending Score (1-100)")
+# Graph
+plt.scatter(x['Annual Income (k$)'], x['Spending Score (1-100)'], c=data['Cluster'])
+
+# Highlight profitable group
+p = data[data['Cluster'] == best]
+plt.scatter(p['Annual Income (k$)'], p['Spending Score (1-100)'],s=100)
+
+plt.title("Customer Segments")
+plt.xlabel("Income")
+plt.ylabel("Spending Score")
 plt.show()
 
-# Cluster analysis
-print(data.groupby('Cluster')[['Annual Income (k$)', 'Spending Score (1-100)']].mean())

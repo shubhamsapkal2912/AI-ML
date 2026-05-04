@@ -2,14 +2,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 # Load dataset
-df = pd.read_csv("Mall_Customers.csv")
+data = pd.read_csv("Mall_Customers.csv")
 # Histogram (Distribution)
-plt.hist(df['Age'])
+age=data['Age']
+plt.hist(age)
 plt.title("Age Distribution")
 plt.xlabel("Age")
 plt.ylabel("Frequency")
 plt.show()
 # Box Plot (Outliers + Spread)
-plt.boxplot(df['Annual Income (k$)'])
+annual_income=data['Annual Income (k$)']
+plt.boxplot(annual_income)
 plt.title("Income Distribution")
 plt.show()

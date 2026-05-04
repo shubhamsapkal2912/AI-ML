@@ -34,7 +34,7 @@ print(data.head())
 
 #traing the model
 #select the feature
-x = data.drop('Play Tennis', axis=1)
+x = data.drop(column=['Play Tennis'])
 y = data['Play Tennis']
 
 #splitting

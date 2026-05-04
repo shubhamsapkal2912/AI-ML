@@ -9,17 +9,17 @@ def best_first_search(graph, start, goal, heuristic):
     pq.put((heuristic[start], start))
 
     while not pq.empty():
-        h, current = pq.get()
+        h, node = pq.get()
 
-        if current == goal:
-            print("Goal reached:", current)
+        if node == goal:
+            print("Goal reached:", node)
             return
 
-        if current not in visited:
-            print(current, end=" ")
-            visited.add(current)
+        if node not in visited:
+            print(node, end=" ")
+            visited.add(node)
 
-            for neighbor in graph[current]:
+            for neighbor in graph[node]:
                 if neighbor not in visited:
                     pq.put((heuristic[neighbor], neighbor))
 

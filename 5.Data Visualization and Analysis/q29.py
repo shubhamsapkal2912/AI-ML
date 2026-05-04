@@ -2,13 +2,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 # Load dataset
-df = pd.read_csv("Mall_Customers.csv")
+data = pd.read_csv("Mall_Customers.csv")
 # Select column
-data = df['Age']
+age = data['Age']
 # -------------------------------
 # Histogram
 # -------------------------------
-plt.hist(data, bins=10)
+plt.hist(age, bins=10)
 plt.title("Age Distribution")
 plt.xlabel("Age")
 plt.ylabel("Frequency")

@@ -1,3 +1,4 @@
+#Write a Python program to calculate Measures of Central Tendency.
 import pandas as pd
 
 # Read CSV file
